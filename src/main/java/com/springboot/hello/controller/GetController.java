@@ -7,7 +7,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/get-api")
-public class HelloController {
+public class GetController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET) //컨트롤러에 어떤 메소드를 할당해줄지 정해줌
     public String hello(){
