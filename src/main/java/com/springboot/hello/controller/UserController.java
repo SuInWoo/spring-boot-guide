@@ -3,10 +3,7 @@ package com.springboot.hello.controller;
 import com.springboot.hello.dao.UserDao;
 import com.springboot.hello.domain.User;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 
@@ -20,13 +17,18 @@ public class UserController {
         this.userDao = userDao;
     }
 
-    @GetMapping("/user")
-    public User addAndGet() throws SQLException {
-        userDao.add(new User("1", "Suin", "1026"));
+    @GetMapping("")
+    public User get() {
         return userDao.findById("1");
     }
 
-    @DeleteMapping("/user/all")
+    @PostMapping("/add")
+    public String add() throws SQLException {
+        userDao.add(new User("1", "suin", "1234"));
+        return "추가 완료";
+    }
+
+    @DeleteMapping("/all")
     public ResponseEntity<Integer> deleteAll() throws SQLException {
         return ResponseEntity
                 .ok()

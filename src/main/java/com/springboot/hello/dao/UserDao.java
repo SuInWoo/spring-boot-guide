@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,7 +15,7 @@ public class UserDao {
     private final JdbcTemplate jdbcTemplate;
 
     public UserDao(JdbcTemplate jdbcTemplate) {
-       this.jdbcTemplate = jdbcTemplate;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     private final RowMapper<User> rowMapper = new RowMapper<>() {
@@ -28,7 +27,7 @@ public class UserDao {
 
     public int deleteAll() throws SQLException {
         return this.jdbcTemplate.update("delete from users");
-   }
+    }
 
     public void add(final User user) throws SQLException {
         this.jdbcTemplate.update
@@ -52,4 +51,3 @@ public class UserDao {
         return this.jdbcTemplate.query(sql, rowMapper);
     }
 }
-
