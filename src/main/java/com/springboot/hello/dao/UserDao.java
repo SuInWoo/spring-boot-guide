@@ -19,18 +19,16 @@ public class UserDao {
        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    RowMapper rowMapper = new RowMapper() {
-        @Override
-        public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-            User user = new User(rs.getString("id"), rs.getString("name"),
-                    rs.getString("password"));
-            return user;
-        }
-    };
-
     public void deleteAll() throws SQLException {
         this.jdbcTemplate.update("delete from users");
    }
+
+    private final RowMapper<User> rowMapper = new RowMapper<>() {
+        @Override
+        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new User(rs.getString("id"), rs.getString("name"), rs.getString("password"));
+        }
+    };
 
     public void add(final User user) throws SQLException {
         this.jdbcTemplate.update
@@ -42,15 +40,16 @@ public class UserDao {
         return this.jdbcTemplate.queryForObject("select count(*) from users", Integer.class);
     }
 
-    public void findById(String id) {
+    public User findById(String id) {
+        User user = null;
         String sql = "SELECT * FROM users WHERE id = ?";
-        this.jdbcTemplate.queryForObject(sql, rowMapper, id);
+        user = this.jdbcTemplate.queryForObject(sql, rowMapper, id);
+        return user;
     }
 
     public List<User> getAll() {
         String sql = "SELECT * FROM users order by id";
         return this.jdbcTemplate.query(sql, rowMapper);
     }
-
 }
 
