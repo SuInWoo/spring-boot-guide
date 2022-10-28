@@ -19,16 +19,16 @@ public class UserDao {
        this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int deleteAll() throws SQLException {
-        return this.jdbcTemplate.update("delete from users");
-   }
-
     private final RowMapper<User> rowMapper = new RowMapper<>() {
         @Override
         public User mapRow(ResultSet rs, int rowNum) throws SQLException {
             return new User(rs.getString("id"), rs.getString("name"), rs.getString("password"));
         }
     };
+
+    public int deleteAll() throws SQLException {
+        return this.jdbcTemplate.update("delete from users");
+   }
 
     public void add(final User user) throws SQLException {
         this.jdbcTemplate.update
