@@ -19,8 +19,8 @@ public class UserDao {
        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void deleteAll() throws SQLException {
-        this.jdbcTemplate.update("delete from users");
+    public int deleteAll() throws SQLException {
+        return this.jdbcTemplate.update("delete from users");
    }
 
     private final RowMapper<User> rowMapper = new RowMapper<>() {
