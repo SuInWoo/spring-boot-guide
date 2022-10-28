@@ -26,7 +26,7 @@ public class UserController {
         return userDao.findById("1");
     }
 
-    @DeleteMapping("/user")
+    @DeleteMapping("/user/all")
     public ResponseEntity<Integer> deleteAll() throws SQLException {
         return ResponseEntity
                 .ok()

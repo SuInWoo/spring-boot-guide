@@ -13,10 +13,10 @@ import java.util.List;
 @Component
 public class UserDao {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
-    public UserDao(DataSource dataSource) {
-       this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public UserDao(JdbcTemplate jdbcTemplate) {
+       this.jdbcTemplate = jdbcTemplate;
     }
 
     public int deleteAll() throws SQLException {
