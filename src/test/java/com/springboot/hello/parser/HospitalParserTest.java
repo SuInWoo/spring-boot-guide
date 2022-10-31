@@ -3,11 +3,16 @@ package com.springboot.hello.parser;
 import com.springboot.hello.domain.Hospital;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
 class HospitalParserTest {
 
 
@@ -16,6 +21,18 @@ class HospitalParserTest {
             "\"광주광역시 북구 풍향동 565번지 4호 3층\",\"광주광역시 북구 동문대로 24, 3층 (풍향동)\",\"61205\",\"효치과의원\"," +
             "\"2.02111E+13\",\"U\",\"2021.11.17 2:40\",\"치과의원\",\"192630.7351\",\"185314.6176\",\"치과의원\"," +
             "\"1\",\"0\",\"0\",\"52.29\",\"401\",\"치과\",\"\",\"\",\"\",\"0\",\"0\",\"\",\"\",\"0\",\"\"";
+
+    @Autowired
+    ReadLineContext<Hospital> hospitalReadLineContext;
+
+    @Test
+    @DisplayName("10만건 이상 데이터가 파싱 되는지")
+    void oneHundredParserTest() throws IOException {
+        String filename = "/Users/suin/Downloads/수업 데이터 파일/fulldata_01_01_02_P_의원.csv";
+        List<Hospital> hospitalList = hospitalReadLineContext.readByLine(filename);
+        assertTrue(hospitalList.size() > 1000);
+        assertTrue(hospitalList.size() > 100000);
+    }
 
     @Test
     @DisplayName("csv 1줄 -> Hospital")
