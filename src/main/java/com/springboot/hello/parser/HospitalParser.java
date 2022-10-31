@@ -9,7 +9,6 @@ public class HospitalParser implements Parser<Hospital> {
     @Override
     public Hospital parse(String str) {
         String[] row = str.split("\",\"");
-        System.out.println(Arrays.toString(row));
 
         Hospital hospital = new Hospital();
         hospital.setId(Integer.parseInt(row[0].replace("\"","")));
