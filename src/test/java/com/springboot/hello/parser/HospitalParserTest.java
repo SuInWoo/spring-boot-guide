@@ -109,6 +109,9 @@ class HospitalParserTest {
         Hospital hospital = hp.parse(line1);
         hospitalDao.add(hospital);
 
-        assertThat(hospitalDao.findById(1).getId()).isEqualTo(1);
+        Hospital hospitalTest = hospitalDao.findById(1);
+        assertThat(hospitalTest.getId()).isEqualTo(1);
+        assertThat(hospitalTest.getLicenseDate())
+                .isEqualTo(hospital.getLicenseDate());
     }
 }
