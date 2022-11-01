@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -98,5 +99,16 @@ class HospitalParserTest {
 
         hospitalDao.deleteAll();
         assertEquals(0, hospitalDao.getCount());
+    }
+
+    @Test
+    @DisplayName("id로 검색")
+    void findById() {
+        hospitalDao.deleteAll();
+        HospitalParser hp = new HospitalParser();
+        Hospital hospital = hp.parse(line1);
+        hospitalDao.add(hospital);
+
+        assertThat(hospitalDao.findById(1).getId()).isEqualTo(1);
     }
 }

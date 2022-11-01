@@ -1,13 +1,14 @@
 package com.springboot.hello.dao;
 
 import com.springboot.hello.domain.Hospital;
-import com.springboot.hello.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Component
 public class HospitalDao {
@@ -18,27 +19,25 @@ public class HospitalDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-//    private final RowMapper<Hospital> rowMapper = new RowMapper<>() {
-//        @Override
-//        public Hospital mapRow(ResultSet rs, int rowNum) throws SQLException {
-//            return new Hospital(rs.getInt("id"),
-//                    rs.getString("openServiceName"), rs.getInt("openLocalGovernmentCode"),
-//                    rs.getString("managementNumber"), rs.getTimestamp("licenseDate"),
-//                    rs.getInt("businessStatus"), rs.getInt("businessStatusCode"),
-//                    rs.getString("phone"), rs.getString("fullAddress"),
-//                    rs.getString("roadNameAddress"), rs.getString("hospitalName"),
-//                    rs.getString("businessTypeName"), rs.getInt("healthcareProviderCount"),
-//                    rs.getInt("patientRoomCount"), rs.getInt("totalNumberOfBeds"),
-//                    rs.getFloat("totalAreaSize"));
-//        }
-//    };
+    RowMapper<Hospital> rowMapper = new RowMapper<>() {
+        @Override
+        public Hospital mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new Hospital(rs.getInt("id"),
+                    rs.getString("open_service_name"), rs.getInt("open_local_government_code"),
+                    rs.getString("management_number"), rs.getObject("license_date", LocalDateTime.class),
+                    rs.getInt("business_status"), rs.getInt("business_status_code"),
+                    rs.getString("phone"), rs.getString("full_address"),
+                    rs.getString("road_name_address"), rs.getString("hospital_name"),
+                    rs.getString("business_type_name"), rs.getInt("healthcare_provider_count"),
+                    rs.getInt("patient_room_count"), rs.getInt("total_number_of_beds"),
+                    rs.getFloat("total_area_size"));
+        }
+    };
 
-//    public Hospital findById(int id) {
-//        Hospital hospital = null;
-//        String sql = "SELECT * FROM nation_wide_hospitals WHERE id = ?;";
-//        hospital = this.jdbcTemplate.queryForObject(sql, rowMapper, id);
-//        return hospital;
-//    }
+    public Hospital findById(int id) {
+        return this.jdbcTemplate.queryForObject(
+                "SELECT * FROM nation_wide_hospitals WHERE id = ?;", rowMapper, id);
+    }
 
     public int getCount() {
         return this.jdbcTemplate.queryForObject(
