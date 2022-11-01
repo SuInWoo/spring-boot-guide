@@ -1,8 +1,13 @@
 package com.springboot.hello.dao;
 
 import com.springboot.hello.domain.Hospital;
+import com.springboot.hello.domain.User;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Component
 public class HospitalDao {
@@ -11,6 +16,37 @@ public class HospitalDao {
 
     public HospitalDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+//    private final RowMapper<Hospital> rowMapper = new RowMapper<>() {
+//        @Override
+//        public Hospital mapRow(ResultSet rs, int rowNum) throws SQLException {
+//            return new Hospital(rs.getInt("id"),
+//                    rs.getString("openServiceName"), rs.getInt("openLocalGovernmentCode"),
+//                    rs.getString("managementNumber"), rs.getTimestamp("licenseDate"),
+//                    rs.getInt("businessStatus"), rs.getInt("businessStatusCode"),
+//                    rs.getString("phone"), rs.getString("fullAddress"),
+//                    rs.getString("roadNameAddress"), rs.getString("hospitalName"),
+//                    rs.getString("businessTypeName"), rs.getInt("healthcareProviderCount"),
+//                    rs.getInt("patientRoomCount"), rs.getInt("totalNumberOfBeds"),
+//                    rs.getFloat("totalAreaSize"));
+//        }
+//    };
+
+//    public Hospital findById(int id) {
+//        Hospital hospital = null;
+//        String sql = "SELECT * FROM nation_wide_hospitals WHERE id = ?;";
+//        hospital = this.jdbcTemplate.queryForObject(sql, rowMapper, id);
+//        return hospital;
+//    }
+
+    public int getCount() {
+        return this.jdbcTemplate.queryForObject(
+                "SELECT COUNT(id) from nation_wide_hospitals;", Integer.class);
+    }
+
+    public int deleteAll() {
+        return this.jdbcTemplate.update("delete from nation_wide_hospitals;");
     }
 
     public void add(Hospital hospital){

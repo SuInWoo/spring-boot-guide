@@ -75,4 +75,14 @@ class HospitalParserTest {
 
         //findById, deleteAll, getCount 구현 필요
     }
+
+    @Test
+    @DisplayName("저장되어있는 컬럼 갯수 출력")
+    void getCount(){
+        hospitalDao.deleteAll();
+        HospitalParser hp = new HospitalParser();
+        Hospital hospital = hp.parse(line1);
+        hospitalDao.add(hospital);
+        assertEquals(1,hospitalDao.getCount());
+    }
 }

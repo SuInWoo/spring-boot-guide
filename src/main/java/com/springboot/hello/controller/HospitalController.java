@@ -29,4 +29,18 @@ public class HospitalController {
                 .status(HttpStatus.ACCEPTED)
                 .body("추가완료");
     }
+
+    @GetMapping("/getCount")
+    public ResponseEntity<Integer> getCount() {
+        return ResponseEntity
+                .status(HttpStatus.ACCEPTED)
+                .body(hospitalDao.getCount());
+    }
+
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<Integer> deleteAll() {
+        return ResponseEntity
+                .status(HttpStatus.ACCEPTED)
+                .body(hospitalDao.deleteAll());
+    }
 }
