@@ -1,10 +1,12 @@
 package com.springboot.hello.parser;
 
+import com.springboot.hello.dao.HospitalDao;
 import com.springboot.hello.domain.Hospital;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -24,6 +26,9 @@ class HospitalParserTest {
 
     @Autowired
     ReadLineContext<Hospital> hospitalReadLineContext;
+
+    @Autowired
+    HospitalDao hospitalDao;
 
     @Test
     @DisplayName("10만건 이상 데이터가 파싱 되는지")
@@ -59,6 +64,15 @@ class HospitalParserTest {
         assertEquals(0, hospital.getTotalNumberOfBeds());
         assertEquals(52.29f, hospital.getTotalAreaSize());
 
+    }
 
+    @Test
+    @DisplayName("Hospital이 insert 잘 되는지")
+    void add(){
+        HospitalParser hp = new HospitalParser();
+        Hospital hospital = hp.parse(line1);
+        hospitalDao.add(hospital);
+
+        //findById, deleteAll, getCount 구현 필요
     }
 }
