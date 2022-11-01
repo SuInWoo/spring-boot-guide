@@ -2,6 +2,7 @@ package com.springboot.hello.parser;
 
 import com.springboot.hello.dao.HospitalDao;
 import com.springboot.hello.domain.Hospital;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +85,18 @@ class HospitalParserTest {
         Hospital hospital = hp.parse(line1);
         hospitalDao.add(hospital);
         assertEquals(1,hospitalDao.getCount());
+    }
+
+    @Test
+    @DisplayName("전체 삭제")
+    void deleteAll() {
+        hospitalDao.deleteAll();
+        HospitalParser hp = new HospitalParser();
+        Hospital hospital = hp.parse(line1);
+        hospitalDao.add(hospital);
+        assertEquals(1,hospitalDao.getCount());
+
+        hospitalDao.deleteAll();
+        assertEquals(0, hospitalDao.getCount());
     }
 }
