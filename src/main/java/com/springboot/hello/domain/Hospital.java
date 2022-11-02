@@ -29,4 +29,12 @@ public class Hospital {
     private int totalNumberOfBeds;
     private float totalAreaSize;
 
+    public String getBusinessStatusCode() {
+        String str = "확인되지 않음";
+        if (businessStatusCode == 2) str = "휴업";
+        else if (businessStatusCode == 3) str = "폐업";
+        else if (businessStatusCode == 13) str = "영업중";
+
+        return str;
+    }
 }
