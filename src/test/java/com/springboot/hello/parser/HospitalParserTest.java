@@ -32,6 +32,16 @@ class HospitalParserTest {
     HospitalDao hospitalDao;
 
     @Test
+    @DisplayName("전체 파일 파싱하여 db에 입력")
+    void addAll() throws IOException {
+        String filename = "/Users/suin/Downloads/수업 데이터 파일/fulldata_01_01_02_P_의원.csv";
+        List<Hospital> hospitalList = hospitalReadLineContext.readByLine(filename);
+        for (int i = 0; i < hospitalList.size(); i++) {
+            hospitalDao.add(hospitalList.get(i));
+        }
+    }
+
+    @Test
     @DisplayName("Hospital이 insert 잘 되는지")
     void add(){
         HospitalParser hp = new HospitalParser();
