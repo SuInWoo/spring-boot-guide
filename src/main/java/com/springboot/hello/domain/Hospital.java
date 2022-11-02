@@ -34,7 +34,6 @@ public class Hospital {
         if (businessStatusCode == 2) str = "휴업";
         else if (businessStatusCode == 3) str = "폐업";
         else if (businessStatusCode == 13) str = "영업중";
-
         return str;
     }
 }
