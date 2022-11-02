@@ -39,8 +39,8 @@ public class HospitalController {
                 .body(hospitalDao.deleteAll());
     }
 
-    @GetMapping("/find")
-    public ResponseEntity<Hospital> findById(int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Hospital> findById(@PathVariable("id") int id) {
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED)
                 .body(hospitalDao.findById(id));
