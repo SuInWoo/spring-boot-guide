@@ -1,18 +1,11 @@
 package com.springboot.hello.controller;
 
 import com.springboot.hello.dao.HospitalDao;
-import com.springboot.hello.dao.UserDao;
 import com.springboot.hello.domain.Hospital;
-import com.springboot.hello.domain.User;
-import io.swagger.models.auth.In;
-import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/v1/hospitals")

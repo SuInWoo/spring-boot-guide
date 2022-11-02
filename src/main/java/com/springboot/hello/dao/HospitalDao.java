@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 @Component
 public class HospitalDao {
@@ -49,7 +48,7 @@ public class HospitalDao {
     }
 
     public void add(Hospital hospital){
-        String sql = "INSERT INTO `hospital_db`.`nation_wide_hospitals`  " +
+        String sql = "INSERT INTO `likelion_db`.`nation_wide_hospitals`  " +
                 "(`id`, `open_service_name`, `open_local_government_code`, " +
                 "`management_number`, `license_date`, `business_status`, " +
                 "`business_status_code`, `phone`, `full_address`, " +

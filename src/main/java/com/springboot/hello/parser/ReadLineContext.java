@@ -22,8 +22,9 @@ public class ReadLineContext<T> {
         while ((str = reader.readLine()) != null) { //한 줄씩 읽어 result에 저장
             try {
                 result.add(parser.parse(str));
+                System.out.println("파싱 됨");
             } catch (Exception e){
-                System.out.printf("파싱중 문제가 생겨 이라인은 넘어갑니다. 파일내용:%s",str);
+                System.out.println("파싱중 문제 발생");
             }
 
         }
