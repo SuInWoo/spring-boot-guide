@@ -7,8 +7,8 @@ spring:
       matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
+    url: jdbc:mysql://ec2-15-165-59-7.ap-northeast-2.compute.amazonaws.com:3306/likelion_db
+    username: root
     password: ${SPRING_DATASOURCE_PASSWORD}
 
 logging:
